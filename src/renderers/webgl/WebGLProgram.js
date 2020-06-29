@@ -3,6 +3,9 @@ import { WebGLShader } from './WebGLShader.js';
 import { ShaderChunk } from '../shaders/ShaderChunk.js';
 import { RGBFormat, NoToneMapping, AddOperation, MixOperation, MultiplyOperation, CubeRefractionMapping, CubeUVRefractionMapping, CubeUVReflectionMapping, CubeReflectionMapping, PCFSoftShadowMap, PCFShadowMap, VSMShadowMap, ACESFilmicToneMapping, CineonToneMapping, CustomToneMapping, ReinhardToneMapping, LinearToneMapping, GammaEncoding, RGBDEncoding, RGBM16Encoding, RGBM7Encoding, RGBEEncoding, sRGBEncoding, LinearEncoding, LogLuvEncoding, GLSL3 } from '../../constants.js';
 
+// From https://www.khronos.org/registry/webgl/extensions/KHR_parallel_shader_compile/
+const COMPLETION_STATUS_KHR = 0x91B1;
+
 let programIdCount = 0;
 
 function addLineNumbers( string ) {
@@ -877,6 +880,24 @@ function WebGLProgram( renderer, cacheKey, parameters, bindingStates ) {
 		}
 
 		return cachedAttributes;
+
+	};
+
+	// indicate when the program is ready to be used
+
+	// if the KHR_parallel_shader_compile extension isn't supported, flag the
+	// program as ready immediately. It may cause a stall when it's first used.
+	let programReady = !parameters.rendererExtensionParallelShaderCompile;
+
+	this.isReady = function () {
+
+		if (!programReady) {
+
+			programReady = gl.getProgramParameter( program, COMPLETION_STATUS_KHR );
+
+		}
+
+		return programReady;
 
 	};
 
