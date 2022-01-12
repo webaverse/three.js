@@ -855,7 +855,6 @@ function WebGLRenderer( parameters = {} ) {
 	// compileAsync
 
 	this.compileAsync = function ( scene, targetScene = null ) {
-
 		// If no explicit targetScene was given use the scene instead
 		if ( ! targetScene ) {
 
