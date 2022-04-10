@@ -19,8 +19,7 @@
 
 		<div id="container"></div>
 		<div id="info">
-			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - spline extrusion examples<br/>
-			by <a href="http://www.lab4games.net/zz85/blog" target="_blank" rel="noopener">zz85</a>
+			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - spline extrusion examples
 		</div>
 
 		<script type="module">
@@ -28,7 +27,7 @@
 			import * as THREE from '../build/three.module.js';
 
 			import Stats from './jsm/libs/stats.module.js';
-			import { GUI } from './jsm/libs/dat.gui.module.js';
+			import { GUI } from './jsm/libs/lil-gui.module.min.js';
 
 			import { Curves } from './jsm/curves/CurveExtras.js';
 			import { OrbitControls } from './jsm/controls/OrbitControls.js';
@@ -211,7 +210,7 @@
 
 				// dat.GUI
 
-				const gui = new GUI( { width: 300 } );
+				const gui = new GUI( { width: 285 } );
 
 				const folderGeometry = gui.addFolder( 'Geometry' );
 				folderGeometry.add( params, 'spline', Object.keys( splines ) ).onChange( function () {
