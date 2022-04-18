@@ -49,8 +49,6 @@ const files = glob.sync( '**/*.js', { cwd: jsmFolder, ignore: [
 	'offscreen/**/*',
 ] } );
 
-console.log( files );
-
 const file = makeFakeEntry( files );
 
 
