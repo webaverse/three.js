@@ -163,7 +163,6 @@ function unmodularize() {
 
 }
 
-const rootFolder = path.resolve( __dirname, '../../' );
 const jsFolder = path.resolve( __dirname, '../../examples/js' );
 const jsmFolder = path.resolve( __dirname, '../../examples/jsm' );
 
@@ -188,30 +187,6 @@ const files = glob.sync( '**/*.js', { cwd: jsmFolder, ignore: [
 	'loaders/NodeMaterialLoader.js',
 	'offscreen/**/*',
 ] } );
-
-
-const makeFakeEntry = ( dependencies ) => {
-
-	const dir = path.resolve( rootFolder, '.esmcache' );
-	const file = path.resolve( dir, 'index.js' );
-	if ( ! fs.existsSync( dir ) ) {
-
-		fs.mkdirSync( dir );
-
-	}
-
-	let content = '';
-	for ( const dependency in dependencies ) {
-
-		content += `export * from ${dependency}\n`;
-
-	}
-
-	fs.writeFileSync( file, content );
-
-};
-
-makeFakeEntry( files );
 
 
 
