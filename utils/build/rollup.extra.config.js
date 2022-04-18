@@ -1,6 +1,7 @@
 import path from 'path';
 import glob from 'glob';
 import fs from 'fs';
+import { files } from './rollup.examples.config';
 
 const rootFolder = path.resolve( __dirname, '../../' );
 const jsmFolder = path.resolve( __dirname, '../../examples/jsm' );
@@ -28,35 +29,14 @@ const makeFakeEntry = ( dependencies ) => {
 
 };
 
-const files = glob.sync( '**/*.js', { cwd: jsmFolder, ignore: [
-	// don't convert libs
-	'libs/**/*',
-	'loaders/ifc/**/*',
-	'three-extras.js',
-	// no non-module library
-	// https://unpkg.com/browse/@webxr-input-profiles/motion-controllers@1.0.0/dist/
-	'webxr/**/*',
-
-	// no non-module library
-	// https://unpkg.com/browse/web-ifc@0.0.17/
-	'loaders/IFCLoader.js',
-
-	'renderers/webgl/**/*',
-	'renderers/webgpu/**/*',
-	'renderers/nodes/**/*',
-	'nodes/**/*',
-	'loaders/NodeMaterialLoader.js',
-	'offscreen/**/*',
-] } );
-
 const file = makeFakeEntry( files );
 
 
 export default {
 
 	input: file,
-	treeshake: true,
-	minify: true,
+	treeshake: false,
+	minify: false, // moved to compile time instead so output can be controlled
 	external: ( a )=>{
 
 		if ( a.includes( 'three.module.js' ) ) {
