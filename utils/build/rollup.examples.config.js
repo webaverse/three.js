@@ -163,15 +163,15 @@ function unmodularize() {
 
 }
 
-
 const jsFolder = path.resolve( __dirname, '../../examples/js' );
 const jsmFolder = path.resolve( __dirname, '../../examples/jsm' );
 
 // list of all .js file nested in the examples/jsm folder
-const files = glob.sync( '**/*.js', { cwd: jsmFolder, ignore: [
+export const files = glob.sync( '**/*.js', { cwd: jsmFolder, ignore: [
 	// don't convert libs
 	'libs/**/*',
 	'loaders/ifc/**/*',
+	'three-extras.js',
 
 	// no non-module library
 	// https://unpkg.com/browse/@webxr-input-profiles/motion-controllers@1.0.0/dist/
@@ -189,6 +189,7 @@ const files = glob.sync( '**/*.js', { cwd: jsmFolder, ignore: [
 	'loaders/NodeMaterialLoader.js',
 	'offscreen/**/*',
 ] } );
+
 
 
 // Create a rollup config for each .js file
