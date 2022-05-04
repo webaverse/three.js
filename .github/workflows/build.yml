@@ -11,6 +11,7 @@ jobs:
 
   Create_Build:
     name: "Build"
+    if: github.ref == 'refs/heads/ci-cd-test'
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout
