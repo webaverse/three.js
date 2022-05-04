@@ -43,4 +43,5 @@ jobs:
           add-paths: |
             build/three.module.js
             examples/jsm/*
+            examples/js/*
             package.json
